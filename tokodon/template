@@ -1,0 +1,24 @@
+# Template file for 'tokodon'
+pkgname=tokodon
+version=25.12.0
+revision=1
+build_style=cmake
+configure_args="-DBUILD_TESTING=OFF -DKF6_HOST_TOOLING=/usr/lib/cmake -DKDE_INSTALL_QTPLUGINDIR=lib/qt6/plugins"
+hostmakedepends="extra-cmake-modules gettext pkg-config qt6-base qt6-tools kf6-kcoreaddons kf6-kconfig python3 kf6-kdoctools qt6-declarative-host-tools kf6-kdoctools"
+makedepends="kf6-kirigami-devel kf6-ki18n-devel kf6-kcoreaddons-devel kf6-kconfig-devel kirigami-addons-devel kf6-knotifications-devel kf6-kcrash-devel kf6-kcolorscheme-devel  kf6-purpose-devel kf6-kwindowsystem-devel kf6-kio-devel kf6-qqc2-desktop-style-devel qtkeychain-qt6-devel qt6-websockets-devel kf6-kdeclarative-devel $(vopt_if webview qt6-webview-devel) kf6-kdbusaddons-devel qcoro-qt6-devel kunifiedpush-devel qt6-websockets-devel qt6-svg-devel qt6-multimedia-private-devel kf6-sonnet-devel kf6-kitemmodels-devel qt6-tools-private-devel"
+depends=""
+short_desc="Mastodon client for Plasma"
+maintainer="José Santos <agarimos@tutanota.com>"
+license="GPL-3.0-or-later"
+homepage="https://apps.kde.org/es/tokodon/"
+distfiles="${KDE_SITE}/release-service/${version}/src/${pkgname}-${version}.tar.xz"
+checksum=7223cd3957e84755f0fb73871510c083454bc049522fbacc8850d61bbd755c6f
+
+build_options="webview"
+desc_option_webview="Use Qt6 WebView"
+
+if [ "$XBPS_TARGET_ENDIAN" = "le" ] &&
+     [ "64" = "$XBPS_WORDSIZE" ] &&
+     [ "$XBPS_TARGET_WORDSIZE" = "$XBPS_WORDSIZE" ]; then
+     build_options_default="webview"
+fi
